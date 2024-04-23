@@ -1,21 +1,48 @@
 import { GluegunCommand, GluegunPrint } from 'gluegun'
 
-import { Expo, ExpoPushMessage, ExpoPushTicket } from 'expo-server-sdk'
+import { Expo, ExpoPushTicket } from 'expo-server-sdk'
+import { Config, TestMessage } from '../types'
+
+const messageTemplate: TestMessage = {
+  to: '', // Will be replaced by the real push tokens
+  'content-available': 1,
+  title: 'This is a test notification',
+  badge: 0,
+  body: 'This is a test notification',
+  // sound: 'default',
+  data: { withSome: 'data' },
+  channelId: 'default',
+}
 
 const testNotificationsAsync = async (
   print: GluegunPrint,
-  pushTokens: string[],
-  testMessages: (ExpoPushMessage & { 'content-available'?: number })[]
+  config: Config,
+  messageCount: number
 ) => {
   // Create a new Expo SDK client
   // optionally providing an access token if you have enabled push security
   const expo = new Expo({
-    useFcmV1: true, // this can be set to true in order to use the FCM v1 API
+    useFcmV1: config.data.useFcmV1, // this can be set to true in order to use the FCM v1 API,
   })
 
-  const messages = []
+  let lastMessageIndex = config.data.lastMessageIndex
 
-  for (const pushToken of pushTokens) {
+  const testMessages = []
+  const messagesToSend = []
+
+  for (let i = 0; i < messageCount; i++) {
+    lastMessageIndex = lastMessageIndex + 1
+    const message = {
+      ...messageTemplate,
+      title: `${messageTemplate.title} ${lastMessageIndex}`,
+    }
+    testMessages.push(message)
+  }
+
+  config.data.lastMessageIndex = lastMessageIndex
+  config.save()
+
+  for (const pushToken of config.data.pushTokens) {
     // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
 
     // Check that all your push tokens appear to be valid Expo push tokens
@@ -26,7 +53,7 @@ const testNotificationsAsync = async (
 
     // Construct a message (see https://docs.expo.io/push-notifications/sending-notifications/)
     testMessages.forEach((message) => {
-      messages.push({
+      messagesToSend.push({
         ...message,
         to: pushToken,
       })
@@ -38,7 +65,7 @@ const testNotificationsAsync = async (
   // recommend you batch your notifications to reduce the number of requests
   // and to compress them (notifications with similar content will get
   // compressed).
-  const chunks = expo.chunkPushNotifications(messages)
+  const chunks = expo.chunkPushNotifications(messagesToSend)
   const tickets: ExpoPushTicket[] = []
   // Send the chunks to the Expo push notification service. There are
   // different strategies you could use. A simple one is to send one chunk at a
@@ -62,12 +89,8 @@ const command: GluegunCommand = {
   name: 'expo-notification-tester',
   run: async (toolbox) => {
     const { print } = toolbox
-    const config = toolbox.config.load()
-    await testNotificationsAsync(
-      print,
-      config.data.pushTokens,
-      config.data.messages
-    )
+    const config = toolbox.config.load() as unknown as Config
+    await testNotificationsAsync(print, config, 1)
   },
 }
 

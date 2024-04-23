@@ -7,10 +7,11 @@ export type TestMessage = ExpoPushMessage & {
 
 export type ConfigData = {
   pushTokens: string[]
-  messages: TestMessage[]
+  lastMessageIndex: number
+  useFcmV1: boolean
 }
 
 export type Config = {
   data: ConfigData
-  save: (data: ConfigData) => void
+  save: () => void
 }

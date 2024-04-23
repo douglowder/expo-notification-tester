@@ -10,16 +10,8 @@ const HOME_DIR =
 const CONFIG_FILE_PATH = join(HOME_DIR, CONFIG_FILE_NAME)
 const DEFAULT_CONFIG_DATA: ConfigData = {
   pushTokens: [],
-  messages: [
-    {
-      to: '', // Will be replaced by the real push tokens
-      'content-available': 1,
-      badge: 0,
-      body: 'This is a test notification',
-      // sound: 'default',
-      data: { withSome: 'data' },
-    },
-  ],
+  useFcmV1: true,
+  lastMessageIndex: 0,
 }
 
 const save = (data: ConfigData) => {
