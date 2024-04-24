@@ -14,11 +14,7 @@ const messageTemplate: TestMessage = {
   channelId: 'default',
 }
 
-const testNotificationsAsync = async (
-  print: GluegunPrint,
-  config: Config,
-  messageCount: number
-) => {
+const testNotificationsAsync = async (print: GluegunPrint, config: Config) => {
   // Create a new Expo SDK client
   // optionally providing an access token if you have enabled push security
   const expo = new Expo({
@@ -29,6 +25,8 @@ const testNotificationsAsync = async (
 
   const testMessages = []
   const messagesToSend = []
+
+  const messageCount = config.data.burstSize
 
   for (let i = 0; i < messageCount; i++) {
     lastMessageIndex = lastMessageIndex + 1
@@ -92,7 +90,7 @@ const command: GluegunCommand = {
   run: async (toolbox) => {
     const { print } = toolbox
     const config = toolbox.config.load() as unknown as Config
-    await testNotificationsAsync(print, config, 1)
+    await testNotificationsAsync(print, config)
   },
 }
 
