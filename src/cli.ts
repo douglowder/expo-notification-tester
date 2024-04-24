@@ -6,8 +6,9 @@ import { build } from 'gluegun'
 async function run(argv) {
   // create a CLI runtime
   const cli = build()
-    .brand('expo-notification-tester')
     .src(__dirname)
+    .brand('expo-notification-tester')
+    .defaultCommand()
     .plugins('./node_modules', {
       matching: 'expo-notification-tester-*',
       hidden: true,
