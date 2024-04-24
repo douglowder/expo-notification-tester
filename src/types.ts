@@ -9,6 +9,7 @@ export type ConfigData = {
   pushTokens: string[]
   lastMessageIndex: number
   useFcmV1: boolean
+  burstSize: number
 }
 
 export type Config = {

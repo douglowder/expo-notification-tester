@@ -87,6 +87,8 @@ const testNotificationsAsync = async (
 
 const command: GluegunCommand = {
   name: 'expo-notification-tester',
+  description:
+    '(default command) Sends <burstSize> notifications to each push token in the list of push tokens in the config',
   run: async (toolbox) => {
     const { print } = toolbox
     const config = toolbox.config.load() as unknown as Config

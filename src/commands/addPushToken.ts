@@ -3,6 +3,8 @@ import { GluegunToolbox } from 'gluegun'
 module.exports = {
   name: 'addPushToken',
   alias: ['apt'],
+  description:
+    'Add an Expo push token to the list of tokens to receive notifications',
   run: async (toolbox: GluegunToolbox) => {
     const {
       parameters,
