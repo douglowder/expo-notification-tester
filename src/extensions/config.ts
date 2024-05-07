@@ -16,6 +16,7 @@ const DEFAULT_CONFIG_DATA: ConfigData = {
   useFcmV1: true,
   lastMessageIndex: 0,
   burstSize: 1,
+  defaultChannelId: 'Miscellaneous',
 }
 
 const validate = (data: ConfigData) => {

@@ -10,15 +10,17 @@ const messageTemplate: TestMessage = {
   badge: 0,
   body: 'This is a test notification',
   // sound: 'default',
-  data: { withSome: 'data' },
-  channelId: 'default',
+  data: {
+    title: 'This is the data in a test notification',
+    body: 'This is the data in a test notification',
+  },
 }
 
 const testNotificationsAsync = async (print: GluegunPrint, config: Config) => {
   // Create a new Expo SDK client
   // optionally providing an access token if you have enabled push security
   const expo = new Expo({
-    useFcmV1: config.data.useFcmV1, // this can be set to true in order to use the FCM v1 API,
+    useFcmV1: config.data.useFcmV1, // this can be set to true in order to use the FCM v1 API
   })
 
   let lastMessageIndex = config.data.lastMessageIndex
@@ -33,7 +35,15 @@ const testNotificationsAsync = async (print: GluegunPrint, config: Config) => {
     const message = {
       ...messageTemplate,
       title: `${messageTemplate.title} ${lastMessageIndex}`,
+      data: {
+        ...messageTemplate.data,
+        title: `${messageTemplate.data.title} ${lastMessageIndex}`,
+      },
+      channelId: config.data.defaultChannelId,
     }
+    print.debug(
+      `Sending message with index ${lastMessageIndex} and channel ID ${config.data.defaultChannelId}`
+    )
     testMessages.push(message)
   }
 
