@@ -1,9 +1,10 @@
 import { build } from 'gluegun'
+import { Options } from 'gluegun/build/types/domain/options'
 
 /**
  * Create the cli and kick it off
  */
-async function run(argv) {
+async function run(argv: string | Options) {
   // create a CLI runtime
   const cli = build()
     .src(__dirname)

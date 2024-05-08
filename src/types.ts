@@ -12,6 +12,7 @@ export type ConfigData = {
   defaultChannelId: string
   useFcmV1: boolean
   burstSize: number
+  badge?: number
 }
 
 export type Config = {

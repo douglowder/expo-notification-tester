@@ -7,7 +7,6 @@ const messageTemplate: TestMessage = {
   to: '', // Will be replaced by the real push tokens
   'content-available': 1,
   title: 'This is a test notification',
-  badge: 0,
   body: 'This is a test notification',
   // sound: 'default',
   data: {
@@ -26,7 +25,7 @@ const testNotificationsAsync = async (print: GluegunPrint, config: Config) => {
   let lastMessageIndex = config.data.lastMessageIndex
 
   const testMessages = []
-  const messagesToSend = []
+  const messagesToSend: TestMessage[] = []
 
   const messageCount = config.data.burstSize
 
@@ -39,6 +38,7 @@ const testNotificationsAsync = async (print: GluegunPrint, config: Config) => {
         ...messageTemplate.data,
         title: `${messageTemplate.data.title} ${lastMessageIndex}`,
       },
+      badge: config.data.badge,
       channelId: config.data.defaultChannelId,
     }
     print.debug(
