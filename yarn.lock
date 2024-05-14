@@ -1857,10 +1857,10 @@ expect@^26.6.2:
     jest-message-util "^26.6.2"
     jest-regex-util "^26.0.0"
 
-expo-server-sdk@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/expo-server-sdk/-/expo-server-sdk-3.9.0.tgz#69ecd990e9ab7cdfeef84914edb4a5f1f170647f"
-  integrity sha512-7S24bGtGoyYfdJGzs4z8lKmDEzjSP+F/tCvhBycjW5rAEC2glYb9rUwvysV/9Gy2P2+zjJZCHahyYh6UJEY2mw==
+expo-server-sdk@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/expo-server-sdk/-/expo-server-sdk-3.10.0.tgz#ad4c475667b4f81dba39bd9fa837c4886658380c"
+  integrity sha512-isymUVz18Syp9G+TPs2MVZ6WdMoyLw8hDLhpywOd8JqM6iGTka6Dr8Dzq7mjGQ8C8486rxLawZx/W+ps+vkjLQ==
   dependencies:
     node-fetch "^2.6.0"
     promise-limit "^2.7.0"
