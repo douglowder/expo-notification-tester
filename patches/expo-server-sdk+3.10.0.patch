@@ -1,0 +1,13 @@
+diff --git a/node_modules/expo-server-sdk/build/ExpoClient.js b/node_modules/expo-server-sdk/build/ExpoClient.js
+index a25a018..8fb0d9f 100644
+--- a/node_modules/expo-server-sdk/build/ExpoClient.js
++++ b/node_modules/expo-server-sdk/build/ExpoClient.js
+@@ -55,7 +55,7 @@ const BASE_API_URL = `${BASE_URL}/--/api/v2`;
+  * The max number of push notifications to be sent at once. Since we can't automatically upgrade
+  * everyone using this library, we should strongly try not to decrease it.
+  */
+-const PUSH_NOTIFICATION_CHUNK_LIMIT = 100;
++const PUSH_NOTIFICATION_CHUNK_LIMIT = 1;
+ /**
+  * The max number of push notification receipts to request at once.
+  */
