@@ -5,7 +5,6 @@ import { Config, TestMessage } from '../types'
 
 const messageTemplate: TestMessage = {
   to: '', // Will be replaced by the real push tokens
-  'content-available': 1,
   title: 'This is a test notification',
   body: 'This is a test notification',
   // sound: 'default',
