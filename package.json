@@ -30,7 +30,8 @@
   "license": "MIT",
   "dependencies": {
     "expo-server-sdk": "^3.10.0",
-    "gluegun": "latest"
+    "gluegun": "latest",
+    "google-auth-library": "^9.11.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
