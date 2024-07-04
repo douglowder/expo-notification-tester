@@ -8,6 +8,9 @@ export type TestMessage = ExpoPushMessage & {
 
 export type ConfigData = {
   pushTokens: string[]
+  devicePushTokens: string[]
+  fcmPrivateKeyPath: string
+  fcmProjectName: string
   lastMessageIndex: number
   defaultChannelId: string
   useFcmV1: boolean

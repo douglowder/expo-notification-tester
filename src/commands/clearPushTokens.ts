@@ -3,7 +3,8 @@ import { GluegunToolbox } from 'gluegun'
 module.exports = {
   name: 'clearPushTokens',
   alias: ['cpt'],
-  description: 'Clear all push tokens in the configuration',
+  description:
+    'Clear all push tokens and device push tokens in the configuration',
   run: async (toolbox: GluegunToolbox) => {
     const {
       print: { info },
@@ -12,6 +13,7 @@ module.exports = {
     const config = toolbox.config.load()
 
     config.data.pushTokens = []
+    config.data.devicePushTokens = []
 
     config.save()
 
