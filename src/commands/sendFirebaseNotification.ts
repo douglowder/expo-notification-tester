@@ -32,8 +32,13 @@ module.exports = {
       const messageBody = {
         message: {
           token: deviceToken,
+          android: {
+            notification: {
+              channel_id: 'testApp',
+              vibrate_timings: ['0s', '0.2s', '0.2s', '0.5s'],
+            },
+          },
           data: {
-            channelId: 'default',
             message: 'Testing',
             title: `This is an FCM notification message ${config.data.lastMessageIndex}`,
             body: JSON.stringify({ title: 'bodyTitle', body: 'bodyBody' }),
