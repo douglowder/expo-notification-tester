@@ -14,8 +14,7 @@ const MAX_BURST_SIZE = 20
 const DEFAULT_CONFIG_DATA: ConfigData = {
   pushTokens: [],
   devicePushTokens: [],
-  fcmPrivateKeyPath: '',
-  fcmProjectName: '',
+  fcmConfigs: {},
   useFcmV1: true,
   lastMessageIndex: 0,
   burstSize: 1,

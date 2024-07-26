@@ -6,11 +6,13 @@ import { Config, TestMessage } from '../types'
 const messageTemplate: TestMessage = {
   to: '', // Will be replaced by the real push tokens
   title: 'This is a test notification',
+  subtitle: 'Expo subtitle',
+  channelId: 'testApp',
   body: 'This is a test notification',
-  // sound: 'default',
   data: {
     title: 'This is the data in a test notification',
     body: 'This is the data in a test notification',
+    url: '/(tabs)/settings',
   },
 }
 
