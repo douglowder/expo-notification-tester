@@ -27,6 +27,7 @@ module.exports = {
       privateKeyPath,
       projectName,
       packageName,
+      devicePushTokens: [],
     }
 
     // Set the default config name if it has not already been set

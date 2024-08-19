@@ -26,6 +26,8 @@ module.exports = {
       config.data.fcmConfigs[config.data.currentFcmConfigName].projectName
     const fcmPackageName =
       config.data.fcmConfigs[config.data.currentFcmConfigName].packageName
+    const devicePushTokens =
+      config.data.fcmConfigs[config.data.currentFcmConfigName].devicePushTokens
 
     const messagePattern =
       parameters.first === undefined
@@ -48,7 +50,9 @@ module.exports = {
     const key = require(fcmPrivateKeyPath)
     const firebaseAccessToken = await getAccessTokenAsync(key)
 
-    for (const deviceToken of config.data.devicePushTokens) {
+    info(`firebaseAccessToken = ${firebaseAccessToken}`)
+
+    for (const deviceToken of devicePushTokens) {
       const messageBody = {
         message: {
           ...baseMessageBody,
@@ -102,9 +106,11 @@ function sampleMessageBody(
   fcmPackageName: string
 ) {
   const sampleNotificationJson = {
-    channel_id: 'testApp',
+    channel_id: config.data.defaultChannelId,
     vibrate_timings: ['0s', '2.0s', '1.0s', '1.0s', '1.0s', '1.0s'],
     sound: 'testSample',
+    image:
+      'https://avatars.githubusercontent.com/u/6577821?s=400&u=f1923761eaad2af0ecdd60386611229246a68917&v=4',
   }
 
   const sampleData = {

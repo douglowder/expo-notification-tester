@@ -1,10 +1,21 @@
 import { GluegunToolbox } from 'gluegun'
+import { Config, FCMConfig } from '../types'
+
+const currentFirebaseConfiguration: (config: Config) => FCMConfig = (
+  config
+) => {
+  const currentFirebaseConfigName = config.data.currentFcmConfigName
+  if (!currentFirebaseConfigName) {
+    throw new Error('No existing Firebase configuration found')
+  }
+  return config.data.fcmConfigs[currentFirebaseConfigName]
+}
 
 module.exports = {
   name: 'addDevicePushToken',
   alias: ['adt'],
   description:
-    'Add a device push token to the list of tokens to receive notifications',
+    'Add a device push token to the list of device tokens for the current Firebase configuration',
   run: async (toolbox: GluegunToolbox) => {
     const {
       parameters,
@@ -15,7 +26,9 @@ module.exports = {
 
     const config = toolbox.config.load()
 
-    config.data.devicePushTokens.push(token)
+    const firebaseConfig = currentFirebaseConfiguration(config)
+
+    firebaseConfig.devicePushTokens.push(token)
 
     config.save()
 

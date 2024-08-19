@@ -10,11 +10,11 @@ export type FCMConfig = {
   privateKeyPath: string // Path to the JSON file containing your FCM private key
   projectName: string // The name of the Firebase project for your app
   packageName: string // The Android package name of your app
+  devicePushTokens: string[]
 }
 
 export type ConfigData = {
   pushTokens: string[]
-  devicePushTokens: string[]
   fcmConfigs: { [key: string]: FCMConfig }
   currentFcmConfigName?: string
   lastMessageIndex: number

@@ -13,7 +13,6 @@ const MIN_BURST_SIZE = 1
 const MAX_BURST_SIZE = 20
 const DEFAULT_CONFIG_DATA: ConfigData = {
   pushTokens: [],
-  devicePushTokens: [],
   fcmConfigs: {},
   useFcmV1: true,
   lastMessageIndex: 0,
@@ -36,6 +35,7 @@ const validate = (data: ConfigData) => {
     }
   }
 }
+
 const save = (data: ConfigData) => {
   validate(data)
   const dataString = JSON.stringify(data, null, 2)
@@ -47,7 +47,7 @@ const load = (): Config => {
 
   try {
     const dataString = readFileSync(CONFIG_FILE_PATH, { encoding: 'utf-8' })
-    data = JSON.parse(dataString)
+    data = JSON.parse(dataString) as ConfigData
   } catch (_error) {
     data = { ...DEFAULT_CONFIG_DATA }
   }

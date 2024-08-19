@@ -38,9 +38,12 @@ const testNotificationsAsync = async (print: GluegunPrint, config: Config) => {
       data: {
         ...messageTemplate.data,
         title: `${messageTemplate.data.title} ${lastMessageIndex}`,
+        url: '/(tabs)/settings',
       },
       badge: config.data.badge,
       channelId: config.data.defaultChannelId,
+      image:
+        'https://avatars.githubusercontent.com/u/6577821?s=400&u=f1923761eaad2af0ecdd60386611229246a68917&v=4',
     }
     print.debug(
       `Sending message with index ${lastMessageIndex} and channel ID ${config.data.defaultChannelId}`
