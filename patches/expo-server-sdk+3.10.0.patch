@@ -1,8 +1,33 @@
+diff --git a/node_modules/expo-server-sdk/build/ExpoClient.d.ts b/node_modules/expo-server-sdk/build/ExpoClient.d.ts
+index 5702fae..ea16f9c 100644
+--- a/node_modules/expo-server-sdk/build/ExpoClient.d.ts
++++ b/node_modules/expo-server-sdk/build/ExpoClient.d.ts
+@@ -57,10 +57,11 @@ export type ExpoPushMessage = {
+     data?: object;
+     title?: string;
+     subtitle?: string;
++    vibrate_timings?: string[] | null,
+     body?: string;
+-    sound?: 'default' | null | {
++    sound?: string | null | {
+         critical?: boolean;
+-        name?: 'default' | null;
++        name?: string | null;
+         volume?: number;
+     };
+     ttl?: number;
 diff --git a/node_modules/expo-server-sdk/build/ExpoClient.js b/node_modules/expo-server-sdk/build/ExpoClient.js
-index a25a018..8fb0d9f 100644
+index a25a018..d48e47c 100644
 --- a/node_modules/expo-server-sdk/build/ExpoClient.js
 +++ b/node_modules/expo-server-sdk/build/ExpoClient.js
-@@ -55,7 +55,7 @@ const BASE_API_URL = `${BASE_URL}/--/api/v2`;
+@@ -49,13 +49,13 @@ const promise_limit_1 = __importDefault(require("promise-limit"));
+ const promise_retry_1 = __importDefault(require("promise-retry"));
+ const zlib_1 = __importDefault(require("zlib"));
+ const ExpoClientValues_1 = require("./ExpoClientValues");
+-const BASE_URL = 'https://exp.host';
++const BASE_URL = process.env.EXPO_BASE_URL ?? 'https://exp.host';
+ const BASE_API_URL = `${BASE_URL}/--/api/v2`;
+ /**
   * The max number of push notifications to be sent at once. Since we can't automatically upgrade
   * everyone using this library, we should strongly try not to decrease it.
   */
