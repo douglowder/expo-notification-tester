@@ -105,14 +105,6 @@ function sampleMessageBody(
   config: Config,
   fcmPackageName: string
 ) {
-  const sampleNotificationJson = {
-    channel_id: config.data.defaultChannelId,
-    vibrate_timings: ['0s', '2.0s', '1.0s', '1.0s', '1.0s', '1.0s'],
-    sound: 'testSample',
-    image:
-      'https://avatars.githubusercontent.com/u/6577821?s=400&u=f1923761eaad2af0ecdd60386611229246a68917&v=4',
-  }
-
   const sampleData = {
     message: 'Testing',
     title: `This is an FCM notification message ${config.data.lastMessageIndex}`,
@@ -121,6 +113,15 @@ function sampleMessageBody(
     url: '/(tabs)/settings',
     //scopeKey: '@brents/microfoam',
     //experienceId: '@brents/microfoam',
+  }
+
+  const sampleNotificationJson = {
+    channel_id: config.data.defaultChannelId,
+    vibrate_timings: ['0s', '2.0s', '1.0s', '1.0s', '1.0s', '1.0s'],
+    sound: 'testSample',
+    body: JSON.stringify(sampleData),
+    image:
+      'https://avatars.githubusercontent.com/u/6577821?s=400&u=f1923761eaad2af0ecdd60386611229246a68917&v=4',
   }
 
   const sampleMessageBody = {}

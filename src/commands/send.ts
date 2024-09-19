@@ -20,7 +20,8 @@ const testNotificationsAsync = async (print: GluegunPrint, config: Config) => {
   // Create a new Expo SDK client
   // optionally providing an access token if you have enabled push security
   const expo = new Expo({
-    useFcmV1: config.data.useFcmV1, // this can be set to true in order to use the FCM v1 API
+    // (Parameter is no longer needed in expo-server-sdk 3.11.0)
+    // useFcmV1: config.data.useFcmV1, // this can be set to true in order to use the FCM v1 API
   })
 
   let lastMessageIndex = config.data.lastMessageIndex
