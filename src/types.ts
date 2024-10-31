@@ -2,6 +2,7 @@ import { ExpoPushMessage } from 'expo-server-sdk'
 
 export type TestMessage = ExpoPushMessage & {
   'content-available'?: number
+  _contentAvailable?: true
   badge?: number
   data: { [key: string]: any }
 }

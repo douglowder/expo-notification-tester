@@ -1,4 +1,5 @@
 import { GluegunToolbox } from 'gluegun'
+import { PromptOptions } from 'gluegun/build/types/toolbox/prompt-enquirer-types'
 
 module.exports = {
   name: 'configureFirebase',
@@ -11,12 +12,45 @@ module.exports = {
       print: { info },
     } = toolbox
 
-    const [name, privateKeyPath, projectName, packageName] = parameters.array
-    if (!name || !privateKeyPath || !projectName || !packageName) {
-      throw new Error(
-        'Missing parameters in command. Usage: cf <name> <private key path> <project name> <package name>'
-      )
+    let [name, privateKeyPath, projectName, packageName] = parameters.array
+    if (name === undefined) {
+      name = (
+        await toolbox.prompt.ask({
+          type: 'input',
+          name: 'selection',
+          message: 'FCM configuration name?',
+          default: 'doug',
+        } as PromptOptions)
+      ).selection
     }
+    if (privateKeyPath === undefined) {
+      privateKeyPath = (
+        await toolbox.prompt.ask({
+          type: 'input',
+          name: 'selection',
+          message: 'Private key path?',
+        } as PromptOptions)
+      ).selection
+    }
+    if (projectName === undefined) {
+      projectName = (
+        await toolbox.prompt.ask({
+          type: 'input',
+          name: 'selection',
+          message: 'Firebase project name?',
+        } as PromptOptions)
+      ).selection
+    }
+    if (packageName === undefined) {
+      packageName = (
+        await toolbox.prompt.ask({
+          type: 'input',
+          name: 'selection',
+          message: 'Package name?',
+        } as PromptOptions)
+      ).selection
+    }
+
     const config = toolbox.config.load()
 
     if (!config.data.fcmConfigs) {
